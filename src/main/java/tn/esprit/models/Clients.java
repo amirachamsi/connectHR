@@ -1,11 +1,15 @@
 package tn.esprit.models;
 
+import java.util.List;
+import tn.esprit.models.Commande;
+
 public class Clients {
 
     private int id_client;
     private String nom_client;
     private String prenom_client;
     private int telephone_client;
+    private List<Commande> commandes;
 
     public Clients(String nom_client, String prenom_client, int telephone_client) {
         this.nom_client = nom_client;
@@ -19,7 +23,8 @@ public class Clients {
         this.prenom_client = prenom_client;
         this.telephone_client = telephone_client;
     }
-    public Clients(){}
+
+    public Clients() {}
 
     public int getId_client() {
         return id_client;
@@ -53,6 +58,15 @@ public class Clients {
         return telephone_client;
     }
 
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
     @Override
     public String toString() {
         return "Clients{" +
@@ -60,7 +74,7 @@ public class Clients {
                 ", nom_client='" + nom_client + '\'' +
                 ", prenom_client='" + prenom_client + '\'' +
                 ", telephone_client=" + telephone_client +
+                ", commandes=" + commandes +
                 '}';
     }
 }
-

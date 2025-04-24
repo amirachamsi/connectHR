@@ -2,6 +2,7 @@ package tn.esprit.services;
 
 import tn.esprit.interfaces.Icrud;
 import tn.esprit.models.Clients;
+import tn.esprit.models.Commande;
 import tn.esprit.models.employe;
 import tn.esprit.utils.connecthrDB;
 
@@ -18,21 +19,35 @@ public class Clientservice implements Icrud<Clients> {
 
     @Override
     public boolean add(Clients c) {
-        String qry ="INSERT INTO `c`( `nom_client`,`prenom_client`, `telephone_client`) VALUES (?,?,?)";
+        String qryClient = "INSERT INTO clients (nom_client, prenom_client, telephone_client) VALUES (?, ?, ?)";
+        String qryCommande = "INSERT INTO commandes (id_client, id_produit, quantite, prix) VALUES (?, ?, ?, ?)";
+
         try {
-            PreparedStatement pstm = cnx.prepareStatement(qry);
-            pstm.setString(1, c.getNom_client());
-            pstm.setString(2, c.getPrenom_client());
-            pstm.setInt(3,c.getTelephone_client());
+            PreparedStatement pstClient = cnx.prepareStatement(qryClient, Statement.RETURN_GENERATED_KEYS);
+            pstClient.setString(1, c.getNom_client());
+            pstClient.setString(2, c.getPrenom_client());
+            pstClient.setInt(3, c.getTelephone_client());
+            pstClient.executeUpdate();
 
-            pstm.executeUpdate();
+            ResultSet rs = pstClient.getGeneratedKeys();
+            if (rs.next()) {
+                int clientId = rs.getInt(1);
+                for (Commande cmd : c.getCommandes()) {
+                    PreparedStatement pstCmd = cnx.prepareStatement(qryCommande);
+                    pstCmd.setInt(1, clientId);
+                    pstCmd.setInt(2, cmd.getId_prod());
+                    pstCmd.setInt(3, cmd.getQuantite());
+                    pstCmd.setFloat(4, cmd.getPrix());
+                    pstCmd.executeUpdate();
+                }
+            }
             return true;
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
+
 
     @Override
     public List<Clients> getAll() {

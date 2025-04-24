@@ -1,56 +1,36 @@
-/*package tn.esprit;
+package tn.esprit;
 
 import tn.esprit.models.Clients;
+import tn.esprit.models.Commande;
 import tn.esprit.services.Clientservice;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) {
-        // Exemple de service Clients
-        Clientservice service = new Clientservice();
+        Commande cmd1 = new Commande(101, 2, 50.0f);  // produit ID 101, 2 unités à 50 TND
+        Commande cmd2 = new Commande(102, 1, 30.0f);  // produit ID 102, 1 unité à 30 TND
 
-        // 1. Créer un nouveau client
-        Clients client = new Clients();
-        client.setNom_client("Ahmed");
-        client.setPrenom_client("Ben Salah");
-        client.setTelephone_client(55443322);
+        List<Commande> commandes = new ArrayList<>();
+        commandes.add(cmd1);
+        commandes.add(cmd2);
 
-        // Produits et quantités associés
-        int[] produits = {101, 102, 103};
-        float[] quantites = {2, 1, 5};
 
-        client.setId_produit(produits);
-        client.setQuantite_commande(quantites);
+        Clients client = new Clients("Ali", "Ben Salah", 55443322);
+        client.setCommandes(commandes);
 
-        client.setDate_commande(LocalDate.now());
 
-        System.out.println("Ajout du client...");
-        if (service.add(client)) {
-            System.out.println("Client ajouté avec succès !");
+        Clientservice clientService = new Clientservice();
+        boolean success = clientService.add(client);
+
+
+        if (success) {
+            System.out.println("✅ Client ajouté avec succès !");
         } else {
-            System.out.println("Erreur lors de l'ajout du client !");
-        }
-
-        // 2. Modifier le client
-        client.setNom_client("Ahmed Modifié");
-        client.setQuantite_commande(new float[]{3, 2, 1}); // Modifier quantités par ex.
-
-        System.out.println("\nModification du client...");
-        if (service.update(client)) {
-            System.out.println("Client modifié avec succès !");
-        } else {
-            System.out.println("Erreur lors de la modification du client !");
-        }
-
-        // 3. Supprimer le client
-        /*System.out.println("\nSuppression du client...");
-        if (service.delete(client)) {
-            System.out.println("Client supprimé avec succès !");
-        } else {
-            System.out.println("Erreur lors de la suppression du client !");
+            System.out.println("❌ Échec de l'ajout du client.");
         }
     }
-}*/
+}
