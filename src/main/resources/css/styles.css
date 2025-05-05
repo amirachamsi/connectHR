@@ -1,0 +1,73 @@
+/* === Base === */
+.root {
+    -fx-background-color: white;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* === Libellés === */
+.label {
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 14px;
+    -fx-background-color: #f4f7f9;
+    -fx-background-radius: 10;
+    -fx-padding: 6 12;
+}
+
+/* === Champs de texte === */
+.text-field, .text-area {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #ecf0f1;
+    -fx-padding: 8 12;
+    -fx-border-color: transparent;
+    -fx-text-fill: #2C3E50;
+}
+
+/* === Menu latéral === */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+}
+
+.menu-button:hover {
+    -fx-background-color: #E0F7FA;
+    -fx-text-fill: #007B8A;
+}
+
+.menu-button.selected {
+    -fx-background-color: #48A1B9;
+    -fx-text-fill: white;
+}
+
+/* === Boutons principaux arrondis turquoise === */
+.button-primary {
+    -fx-background-color: #48A1B9;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+    -fx-transition: all 0.3s ease;
+}
+
+.button-primary:hover {
+    -fx-background-color: #3A92A8;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* === Titre === */
+.title-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #003049;
+    -fx-font-weight: bold;
+}
